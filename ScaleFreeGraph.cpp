@@ -19,35 +19,35 @@ int ScaleFreeGraph::getDegree(int vertex) {
     return (int)this->adj[vertex].size();
 }
 
-std::vector<std::pair<double, int>> ScaleFreeGraph::getProbabilities(int fromFirst) {
-    std::vector<std::pair<double, int>> probabilities(fromFirst);
+std::vector<double> ScaleFreeGraph::getProbabilities(int fromFirst) {
+    std::vector<double> probabilities(fromFirst);
 
     int sumDegree = 0;
     for (int vertex = 0; vertex < fromFirst; vertex++) {
         int degree = this->getDegree(vertex);
         sumDegree += degree;
-        probabilities[vertex] = {degree, vertex};
+        probabilities[vertex] = degree;
     }
 
     for (int vertex = 0; vertex < fromFirst; vertex++) {
-        if (sumDegree == 0)
-            probabilities[vertex].first = 0;
-        else
-            probabilities[vertex].first /= sumDegree;
+        probabilities[vertex] /= sumDegree;
     }
 
     return probabilities;
 }
 
-int chooseRandomWeighted(std::vector<std::pair<double, int>> &probabilites) {
-
+int chooseRandomWeighted(std::vector<double> &probabilites) {
+    std::discrete_distribution<int> dist(probabilites.begin(), probabilites.end());
+    std::random_device dev;
+    std::mt19937 gen(dev());
+    return dist(gen);
 }
 
 std::vector<int> ScaleFreeGraph::chooseRandomVertices(int fromFirst) {
     std::vector<int> vertices;
-    std::vector<std::pair<double, int>> probabilities = this->getProbabilities(fromFirst);
+    std::vector<double> probabilities = this->getProbabilities(fromFirst);
 
-    for (int idx = 0; idx < fromFirst; idx++) {
+    for (int idx = 0; idx < this->M; idx++) {
         int vertex = chooseRandomWeighted(probabilities);
         vertices.push_back(vertex);
     }
@@ -63,9 +63,15 @@ void ScaleFreeGraph::addEdge(int vertex1, int vertex2) {
 void ScaleFreeGraph::generateBAModel() {
     for (int vertex = this->M; vertex < this->N; vertex++) {
         std::vector<int> connectTo = this->chooseRandomVertices(vertex);
-
+        if (vertex == this->M) {
+            connectTo = std::vector<int>(this->M);
+            std::iota(connectTo.begin(), connectTo.end(), 0);
+        }
+        std::cout << vertex << ":";
         for (int neighbour : connectTo) {
+            std::cout << " " << neighbour;
             this->addEdge(vertex, neighbour);
         }
+        std::cout << "\n";
     }
 }

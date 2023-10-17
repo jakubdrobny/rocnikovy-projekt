@@ -6,6 +6,8 @@
 #define CODE_SCALEFREEGRAPH_H
 
 #include <vector>
+#include <random>
+#include <iostream>
 
 class ScaleFreeGraph {
 public:
@@ -18,7 +20,7 @@ public:
     void generateBAModel();
     std::vector<int> chooseRandomVertices(int fromFirst);
     void addEdge(int vertex1, int vertex2);
-    std::vector<std::pair<double, int>> getProbabilities(int fromFirst);
+    std::vector<double> getProbabilities(int fromFirst);
     int getDegree(int vertex);
 };
 
