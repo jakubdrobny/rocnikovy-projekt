@@ -1,7 +1,3 @@
-//
-// Created by jakubd on 9.10.2023.
-//
-
 #ifndef CODE_SCALEFREEGRAPH_H
 #define CODE_SCALEFREEGRAPH_H
 
@@ -17,7 +13,7 @@ public:
     std::vector<std::vector<int>> adj;
     std::vector<int> degrees;
 
-    void generateBAModel();
+    int generateBAModel();
     std::vector<int> chooseRandomVertices(int fromFirst);
     void addEdge(int vertex1, int vertex2);
     std::vector<double> getProbabilities(int fromFirst);

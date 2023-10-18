@@ -1,7 +1,3 @@
-//
-// Created by jakubd on 9.10.2023.
-//
-
 #include "ScaleFreeGraph.h"
 
 ScaleFreeGraph::ScaleFreeGraph(int N, int M) {
@@ -60,18 +56,42 @@ void ScaleFreeGraph::addEdge(int vertex1, int vertex2) {
     this->adj[vertex2].push_back(vertex1);
 }
 
-void ScaleFreeGraph::generateBAModel() {
+int ScaleFreeGraph::generateBAModel() {
+    std::vector<int> color(this->N, -1);
+    for (int vertex = 0; vertex < this->M; vertex++)
+        color[vertex] = 1;
+
     for (int vertex = this->M; vertex < this->N; vertex++) {
         std::vector<int> connectTo = this->chooseRandomVertices(vertex);
         if (vertex == this->M) {
             connectTo = std::vector<int>(this->M);
             std::iota(connectTo.begin(), connectTo.end(), 0);
         }
+
+        std::vector<int> used_color(this->N + 1);
+
         std::cout << vertex << ":";
         for (int neighbour : connectTo) {
             std::cout << " " << neighbour;
             this->addEdge(vertex, neighbour);
+            used_color[color[neighbour]] = 1;
         }
         std::cout << "\n";
+
+        int vertex_color = 1;
+        while (vertex_color <= this->N && used_color[vertex_color] == 1) {
+            vertex_color++;
+        }
+
+        color[vertex] = vertex_color;
     }
+
+    int K = 1;
+    std::cout << "greedyColoring:";
+    for (int vertex = 0; vertex < this->N; vertex++) {
+        K = std::max(K, color[vertex]);
+        std::cout << " " << color[vertex];
+    }
+    std::cout << "\n";
+    return K;
 }

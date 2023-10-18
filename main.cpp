@@ -2,5 +2,6 @@
 
 int main() {
     ScaleFreeGraph g(10, 5);
-    g.generateBAModel();
+    int greedyK = g.generateBAModel();
+    std::cout << greedyK << "\n";
 }
