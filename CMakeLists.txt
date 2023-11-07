@@ -3,6 +3,4 @@ project(code)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(code main.cpp
-        ScaleFreeGraph.h
-        ScaleFreeGraph.cpp)
+add_executable(code main.cpp)
