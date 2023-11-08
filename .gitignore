@@ -1,4 +1,3 @@
-v1/cmake-build-debug/
-v2/cmake-build-debug/
+debug/**
 .idea
 .vscode
