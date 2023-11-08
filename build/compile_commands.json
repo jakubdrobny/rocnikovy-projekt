@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/jakubd/skola/Rocnikovy-projekt/code/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/code.dir/main.cpp.o -c /home/jakubd/skola/Rocnikovy-projekt/code/main.cpp",
+  "file": "/home/jakubd/skola/Rocnikovy-projekt/code/main.cpp",
+  "output": "CMakeFiles/code.dir/main.cpp.o"
+},
+{
+  "directory": "/home/jakubd/skola/Rocnikovy-projekt/code/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/code.dir/Graph.cpp.o -c /home/jakubd/skola/Rocnikovy-projekt/code/Graph.cpp",
+  "file": "/home/jakubd/skola/Rocnikovy-projekt/code/Graph.cpp",
+  "output": "CMakeFiles/code.dir/Graph.cpp.o"
+},
+{
+  "directory": "/home/jakubd/skola/Rocnikovy-projekt/code/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/code.dir/History.cpp.o -c /home/jakubd/skola/Rocnikovy-projekt/code/History.cpp",
+  "file": "/home/jakubd/skola/Rocnikovy-projekt/code/History.cpp",
+  "output": "CMakeFiles/code.dir/History.cpp.o"
+},
+{
+  "directory": "/home/jakubd/skola/Rocnikovy-projekt/code/build",
+  "command": "/usr/bin/g++ -g -o CMakeFiles/code.dir/HistoryEntry.cpp.o -c /home/jakubd/skola/Rocnikovy-projekt/code/HistoryEntry.cpp",
+  "file": "/home/jakubd/skola/Rocnikovy-projekt/code/HistoryEntry.cpp",
+  "output": "CMakeFiles/code.dir/HistoryEntry.cpp.o"
+}
+]
