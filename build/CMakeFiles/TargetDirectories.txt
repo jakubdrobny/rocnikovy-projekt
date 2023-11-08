@@ -1,3 +1,0 @@
-/home/jakubd/skola/Rocnikovy-projekt/code/build/CMakeFiles/code.dir
-/home/jakubd/skola/Rocnikovy-projekt/code/build/CMakeFiles/edit_cache.dir
-/home/jakubd/skola/Rocnikovy-projekt/code/build/CMakeFiles/rebuild_cache.dir
