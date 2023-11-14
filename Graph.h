@@ -28,7 +28,7 @@ class Graph {
         void printGraph();
         int firstFitColoring();
         void colorRecursively(int vertexNo, std::vector<int> &color, int &ans);
-        int chromaticNumber();
+        int chromaticNumberBrute();
         int getRandom(int right);
         std::vector<int> getPermutationsOfVertices();
         History createHistoryFromPermutation(std::vector<int> vertices);

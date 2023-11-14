@@ -11,8 +11,8 @@ int main() {
     for (int i = 0; i < 20; i++) {
         Graph g(N, M);
         g.generateGraphBAModel();
-        g.printGraph();
-        int greedyK = g.firstFitColoring(), optimalK = g.chromaticNumber();
+        //g.printGraph();
+        int greedyK = g.firstFitColoring(), optimalK = g.chromaticNumberBrute();
 
         std::cout << "greedy no. of colors: " << greedyK << "\n";
         std::cout << "optimal no. of colors: " << optimalK << "\n";
