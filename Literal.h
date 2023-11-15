@@ -6,9 +6,14 @@ class Literal {
         int value, node, color;
 
         Literal() {}
-        Literal(int value, int node, int color): value(value), node(node), color(color) {}
+        Literal(int node, int color, int colors, bool negate = false) {
+            this->node = node;
+            this->color = color;
+            this->value = valueFromNodeAndColor(colors, negate);
+        }
 
         void print();
+        int valueFromNodeAndColor(int K, bool negate);
 };
 
 #endif

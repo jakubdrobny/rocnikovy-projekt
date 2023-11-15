@@ -10,12 +10,13 @@ class CNF {
     public:
         std::vector<Clause> clauses;
         
-        CNF(Graph g) {
-            loadFromGraph(g);
+        CNF(Graph g, int K) {
+            loadFromGraph(g, K);
         }
 
-        void loadFromGraph(Graph g) {}
-        void print() {}
+        void loadFromGraph(Graph g, int K);
+        void addClause(Clause clause);
+        void print();
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include "History.h"
 #include "HistoryEntry.h"
+#include "Edge.h"
 
 #include <vector>
 
@@ -10,6 +11,7 @@ class Graph {
     public:
         int N, M;
         std::vector<std::vector<int>> adj;
+        std::vector<Edge> edges;
         History history;
         
         Graph() {}

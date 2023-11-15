@@ -40,7 +40,7 @@ void graphToCnfTest() {
   	Graph g(N, M);
   	g.generateGraphBAModel();
 
-  	CNF cnf(g);
+  	CNF cnf(g, 3);
 	cnf.print();
 }
 

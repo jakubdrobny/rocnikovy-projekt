@@ -13,6 +13,8 @@ void Graph::addEdge(int v, int u) {
 
     this->adj[v].push_back(u);
     this->adj[u].push_back(v);
+
+    this->edges.push_back(Edge(u, v));
 }
 
 int Graph::getDegree(int v) {

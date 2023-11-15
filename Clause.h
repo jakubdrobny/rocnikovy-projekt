@@ -11,8 +11,8 @@ class Clause {
 
         Clause() {}
 
-        void add(Literal literal) {}
-        void print() {}
+        void addLiteral(Literal literal);
+        void print();
 };
 
 #endif
