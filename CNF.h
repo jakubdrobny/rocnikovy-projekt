@@ -8,6 +8,7 @@
 
 class CNF {
     public:
+        int vars_num;
         std::vector<Clause> clauses;
         
         CNF(Graph g, int K) {

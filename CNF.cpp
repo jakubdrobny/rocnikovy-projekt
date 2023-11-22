@@ -2,6 +2,7 @@
 #include "Clause.h"
 #include "Literal.h"
 #include "Edge.h"
+#include <algorithm>
 
 void CNF::loadFromGraph(Graph g, int K) {
     // phase 1: 
@@ -45,6 +46,8 @@ void CNF::loadFromGraph(Graph g, int K) {
 }
 
 void CNF::addClause(Clause clause) {
+    for (Literal lit : clause.literals)
+        this->vars_num = std::max(this->vars_num, std::abs(lit.value));
     this->clauses.push_back(clause);
 }
 
