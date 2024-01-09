@@ -6,6 +6,7 @@
 #include <set>
 #include <chrono>
 #include "assert.h"
+#include <cryptominisat5/cryptominisat.h>
 
 void Graph::addEdge(int v, int u) {
     assert(0 <= v && v <= (int)this->adj.size());
@@ -78,10 +79,10 @@ void Graph::generateGraphBAModel() {
 }
 
 void Graph::printGraph() {
-    std::cout << this->N << "\n";
+    std::cout << "No. of nodes: " << this->N << " and the no. of vertices to sample: " << this->M << "\n";
     for (int i = 0; i < this->N; i++) {
         for (int x : this->adj[i]) {
-            std::cout << i << " " << x << "\n";
+            std::cout << "Edge from " << i << " to " << x << "\n";
         }
     }
 }
@@ -172,4 +173,39 @@ void Graph::constructGraphFromHistory(History history) {
             this->addEdge(entry.from, neighbour);
         }
     }
+}
+
+bool Graph::canColorWithKSAT(int k) {
+    using namespace CMSat;
+
+    CNF cnf;
+    cnf.loadFromGraph(this, k);
+
+    SATSolver solver;
+    solver.new_vars(cnf.vars_num);
+    for (Clause clause : cnf.clauses) {
+        std::vector<Lit> solverClause;
+        for (Literal lit : clause.literals) {
+            solverClause.push_back(lit.value < 0 ? Lit(-lit.value - 1, true) : Lit(lit.value - 1, false));
+        }
+        solver.add_clause(solverClause);
+    }
+
+    return solver.solve() == l_True;
+}
+
+int Graph::chromaticNumberSAT() {
+    // binary search to find K
+    int l = 1, r = this->N;
+
+    while (l < r) {
+        int mid = (l + r) / 2;
+        if (canColorWithKSAT(mid)) {
+            r = mid;
+        } else {
+            l = mid + 1;
+        }
+    }
+    
+    return l;
 }

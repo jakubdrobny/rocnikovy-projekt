@@ -8,7 +8,7 @@ void Clause::addLiteral(Literal literal) {
 
 void Clause::print() {
     for (int idx = 0; idx < (int)this->literals.size(); idx++) {
-        if (idx) std::cout << " ";
+        if (idx) std::cout << " v ";
         this->literals[idx].print();
     }
     std::cout << "\n";

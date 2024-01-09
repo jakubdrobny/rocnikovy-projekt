@@ -4,6 +4,7 @@
 #include "History.h"
 #include "HistoryEntry.h"
 #include "Edge.h"
+#include "CNF.h"
 
 #include <vector>
 
@@ -31,6 +32,8 @@ class Graph {
         int firstFitColoring();
         void colorRecursively(int vertexNo, std::vector<int> &color, int &ans);
         int chromaticNumberBrute();
+        int chromaticNumberSAT();
+        bool canColorWithKSAT(int k);
         int getRandom(int right);
         std::vector<int> getPermutationsOfVertices();
         History createHistoryFromPermutation(std::vector<int> vertices);
