@@ -3,6 +3,7 @@
 #include "Literal.h"
 #include "Edge.h"
 #include <algorithm>
+#include <set>
 
 void CNF::loadFromGraph(Graph* g, int K) {
     // phase 1: 
@@ -35,7 +36,10 @@ void CNF::loadFromGraph(Graph* g, int K) {
 
     // phase 3:
     //   - for each edge from i to j, add clause X_ik => ~X_jk, where k is color
+    std::set<std::pair<int, int>> set_edges;
     for (Edge edge : g->edges) {
+        if (set_edges.count(std::make_pair(std::min(edge.from, edge.to), std::max(edge.from, edge.to))))
+            continue;
         for (int color = 1; color <= K; color++) {
             Clause clause;
             clause.addLiteral(Literal(edge.from, color, K, true));

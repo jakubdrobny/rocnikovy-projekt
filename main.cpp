@@ -1,3 +1,4 @@
+#include <set>
 #include <iostream>
 #include <cryptominisat5/cryptominisat.h>
 #include <chrono>
@@ -96,17 +97,17 @@ void benchmarkChromaticSAT() {
     auto start = std::chrono::steady_clock::now();
     int chromaticNumber = g.chromaticNumberSAT();
     auto end = std::chrono::steady_clock::now();
-
+    
     g.printGraph();
     std::cout << "Elapsed time: " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms\n";
     std::cout << "The chromatic number of the given graph is " << chromaticNumber << "\n";
 }
 
 int main() {
-  // basicFunctionalityShowcase();
+  // basicFunctionalityShowcase(); // using bruteforce for chromaticNo computation
   // graphToCnfTest();
-  // testChromaticBruteAndSAT();
-  benchmarkChromaticSAT();
+  // testChromaticBruteAndSAT(); // N <= 9
+  benchmarkChromaticSAT(); // N <= 200 AND M <= 20
 
   return 0;
 }

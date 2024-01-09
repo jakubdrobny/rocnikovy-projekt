@@ -8,7 +8,7 @@ class Graph;
 
 class CNF {
     public:
-        int vars_num;
+        int vars_num = 0;
         std::vector<Clause> clauses;
 
         void loadFromGraph(Graph *g, int K);

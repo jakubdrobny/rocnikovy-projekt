@@ -125,9 +125,7 @@ void Graph::colorRecursively(int vertexNo, std::vector<int> &color, int &ans) {
 int Graph::chromaticNumberBrute() {
     int ans = this->N + 1;
     std::vector<int> color(this->N, -1);
-    for (int i = 0; i < this->M; i++)
-        color[i] = 1;
-    colorRecursively(this->M, color, ans);
+    colorRecursively(0, color, ans);
     return ans;
 }
 
