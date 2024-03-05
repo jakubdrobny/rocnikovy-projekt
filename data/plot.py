@@ -3,6 +3,7 @@ import csv
 
 filename = input("Enter filename without extension (.csv) to take data from: ")
 pltfile = input("Enter filename with extension to save plot to: ")
+M = int(input("Enter the initial no. of vertices of the graph: "))
 
 rows = []
 with open(f"{filename}.csv", 'r') as file:
@@ -17,7 +18,7 @@ for row in rows:
     for i in range(1, len(row)):
         ypoints[i - 1].append(float(row[i]) if i == 1 else int(row[i]))
 
-plt.title("Chromatic number of scale-free graphs (BA model)\nwith initial no. of vertices M = 4")
+plt.title(f"Chromatic number of scale-free graphs (BA model)\nwith initial no. of vertices M = {M}")
 plt.xlabel("Number of vertices")
 plt.ylabel("Median chromatic number")
 
