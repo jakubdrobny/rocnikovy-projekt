@@ -132,6 +132,8 @@ void createDataForFixedM() {
         y.push_back(C % 2 ? chromatic_numbers[C / 2] : (double) (chromatic_numbers[C / 2] + chromatic_numbers[(C - 1) / 2]) / 2.);
         min_y.push_back(chromatic_numbers[0]);
         max_y.push_back(chromatic_numbers.back());
+
+        std::cout << min_y.back() << " " << y.back() << " " << max_y.back() << "\n";
     }
 
     assert(x.size() == y.size());
