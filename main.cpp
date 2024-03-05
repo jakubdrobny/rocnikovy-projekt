@@ -152,7 +152,7 @@ int main() {
   // basicFunctionalityShowcase(); // using bruteforce for chromaticNo computation
   // graphToCnfTest();
   // testChromaticBruteAndSAT(); // N <= 9
-  //benchmarkChromaticSAT(); // N <= 200 AND M <= 20
+  // benchmarkChromaticSAT(); // N <= 200 AND M <= 20
   createDataForFixedM();
 
   return 0;
