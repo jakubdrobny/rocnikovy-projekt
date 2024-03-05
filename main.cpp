@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cryptominisat5/cryptominisat.h>
 #include <chrono>
+#include <fstream>
 
 #include "Graph.h"
 #include "CNF.h"
@@ -103,11 +104,54 @@ void benchmarkChromaticSAT() {
     std::cout << "The chromatic number of the given graph is " << chromaticNumber << "\n";
 }
 
+void createDataForFixedM() {
+    std::cout << "Enter filename without extension (.csv) to store data: ";
+    std::string filename; std::cin >> filename;
+    filename += ".csv";
+    std::cout << "Enter M (no. of initial vertices): ";
+    int M; std::cin >> M;
+
+    std::vector<int> x;
+    std::vector<double> y;
+    std::vector<int> min_y, max_y;
+
+    for (int N = M + 5; N <= 100; N++) {
+        std::cout << "Generating data for N=" << N << "...\n";
+        std::vector<int> chromatic_numbers;
+        
+        for (int it = 0; it < 100; it++) {
+            Graph g(N, M);
+            g.generateGraphBAModel();
+            chromatic_numbers.push_back(g.chromaticNumberSAT());
+        }
+
+        std::sort(chromatic_numbers.begin(), chromatic_numbers.end());
+
+        x.push_back(N);
+        int C = (int)chromatic_numbers.size();
+        y.push_back(C % 2 ? chromatic_numbers[C / 2] : (double) (chromatic_numbers[C / 2] + chromatic_numbers[(C - 1) / 2]) / 2.);
+        min_y.push_back(chromatic_numbers[0]);
+        max_y.push_back(chromatic_numbers.back());
+    }
+
+    assert(x.size() == y.size());
+    
+    std::ofstream outputFile(filename);
+    outputFile << "x;y;min_y;max_y\n";
+    
+    int ndata = (int)x.size();
+    for (int i = 0; i < ndata; i++) {
+        outputFile << x[i] << ";" << y[i] << ";" << min_y[i] << " " << max_y[i] << "\n";
+    }
+    outputFile.close();
+}
+
 int main() {
   // basicFunctionalityShowcase(); // using bruteforce for chromaticNo computation
   // graphToCnfTest();
   // testChromaticBruteAndSAT(); // N <= 9
-  benchmarkChromaticSAT(); // N <= 200 AND M <= 20
+  //benchmarkChromaticSAT(); // N <= 200 AND M <= 20
+  createDataForFixedM();
 
   return 0;
 }
