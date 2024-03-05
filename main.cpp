@@ -143,7 +143,7 @@ void createDataForFixedM() {
     
     int ndata = (int)x.size();
     for (int i = 0; i < ndata; i++) {
-        outputFile << x[i] << ";" << y[i] << ";" << min_y[i] << " " << max_y[i] << "\n";
+        outputFile << x[i] << ";" << y[i] << ";" << min_y[i] << ";" << max_y[i] << "\n";
     }
     outputFile.close();
 }
