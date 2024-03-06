@@ -3,6 +3,7 @@
 #include <cryptominisat5/cryptominisat.h>
 #include <chrono>
 #include <fstream>
+#include <numeric>
 
 #include "Graph.h"
 #include "CNF.h"
@@ -148,12 +149,52 @@ void createDataForFixedM() {
     outputFile.close();
 }
 
+void testMinimalChromaticNumber() {
+    std::cout << "Enter N (no. of nodes) and M (initial number of nodes): ";
+    int N, M; std::cin >> N >> M;
+
+    History h;
+    std::vector<int> to(M);
+    std::iota(to.begin(), to.end(), 0);
+    for (int i = M; i < N; i++) {
+        HistoryEntry he(i, to);
+        h.addEntry(he);
+    }
+
+    Graph g(N, M);
+    g.constructGraphFromHistory(h);
+    int chromaticNumber = g.chromaticNumberSAT();
+    std::cout << "Chromatic number is: " << chromaticNumber << "\n";
+}
+
+void testMaximalChromaticNumber() {
+    std::cout << "Enter N (no. of nodes) and M (initial number of nodes): ";
+    int N, M; std::cin >> N >> M;
+
+    History h;
+    std::vector<int> to(M);
+    std::iota(to.begin(), to.end(), 0);
+    for (int i = M; i < N; i++) {
+        HistoryEntry he(i, to);
+        h.addEntry(he);
+        for (int &x : to)
+            x++;
+    }
+
+    Graph g(N, M);
+    g.constructGraphFromHistory(h);
+    int chromaticNumber = g.chromaticNumberSAT();
+    std::cout << "Chromatic number is: " << chromaticNumber << "\n";
+}
+
 int main() {
   // basicFunctionalityShowcase(); // using bruteforce for chromaticNo computation
   // graphToCnfTest();
   // testChromaticBruteAndSAT(); // N <= 9
   // benchmarkChromaticSAT(); // N <= 200 AND M <= 20
-  createDataForFixedM();
+  // createDataForFixedM();
+  // testMinimalChromaticNumber();
+  testMaximalChromaticNumber();
 
   return 0;
 }
