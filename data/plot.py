@@ -24,7 +24,7 @@ plt.ylabel("Median chromatic number")
 
 cnt = 1
 for _ypoints in ypoints:
-    plt.plot(xpoints, _ypoints, label="median" if header[cnt] == 'y' else 'min' if header[cnt] == 'min_y' else 'max')
+    plt.plot(xpoints, _ypoints, label=header[cnt])
     cnt += 1
 
 plt.legend(loc="lower right")
