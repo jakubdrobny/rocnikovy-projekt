@@ -2,6 +2,7 @@
 #include "Clause.h"
 #include "Literal.h"
 #include "Edge.h"
+#include "assert.h"
 #include <algorithm>
 #include <set>
 
@@ -47,6 +48,16 @@ void CNF::loadFromGraph(Graph* g, int K) {
             this->addClause(clause);
         }
     }
+
+    // break symmetries - assign some pair of vertices two colors
+    assert(!g->edges.empty());
+
+    Edge edge = g->edges[0];
+
+    Clause clause;
+    clause.addLiteral(Literal(edge.from, 1, K));
+    clause.addLiteral(Literal(edge.to, 1, K));
+    this->addClause(clause);
 }
 
 void CNF::addClause(Clause clause) {

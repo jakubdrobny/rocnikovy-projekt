@@ -105,6 +105,14 @@ void benchmarkChromaticSAT() {
     std::cout << "The chromatic number of the given graph is " << chromaticNumber << "\n";
 }
 
+void compute_min_median_max(std::vector<int> data, std::vector<int> &min_y, std::vector<double> &y, std::vector<int> &max_y) {
+    std::sort(data.begin(), data.end());
+    min_y.push_back(data.front());
+    int C = (int)data.size();
+    y.push_back(C % 2 ? data[C / 2] : (double) (data[C / 2] + data[(C - 1) / 2]) / 2.);
+    max_y.push_back(data.back());
+}
+
 void createDataForFixedM() {
     std::cout << "Enter filename without extension (.csv) to store data: ";
     std::string filename; std::cin >> filename;
@@ -113,38 +121,35 @@ void createDataForFixedM() {
     int M; std::cin >> M;
 
     std::vector<int> x;
-    std::vector<double> y;
-    std::vector<int> min_y, max_y;
+    std::vector<double> y, greedy_y;
+    std::vector<int> min_y, max_y, min_greedy_y, max_greedy_y;
 
     for (int N = M + 5; N <= 100; N++) {
         std::cout << "Generating data for N=" << N << "...\n";
         std::vector<int> chromatic_numbers;
+        std::vector<int> greedy_k;
         
         for (int it = 0; it < 100; it++) {
             Graph g(N, M);
             g.generateGraphBAModel();
             chromatic_numbers.push_back(g.chromaticNumberSAT());
+            greedy_k.push_back(g.firstFitColoring());
         }
 
-        std::sort(chromatic_numbers.begin(), chromatic_numbers.end());
-
         x.push_back(N);
-        int C = (int)chromatic_numbers.size();
-        y.push_back(C % 2 ? chromatic_numbers[C / 2] : (double) (chromatic_numbers[C / 2] + chromatic_numbers[(C - 1) / 2]) / 2.);
-        min_y.push_back(chromatic_numbers[0]);
-        max_y.push_back(chromatic_numbers.back());
 
-        std::cout << min_y.back() << " " << y.back() << " " << max_y.back() << "\n";
+        compute_min_median_max(chromatic_numbers, min_y, y, max_y);
+        compute_min_median_max(greedy_k, min_greedy_y, greedy_y, max_greedy_y);
     }
 
     assert(x.size() == y.size());
     
     std::ofstream outputFile(filename);
-    outputFile << "x;y;min_y;max_y\n";
+    outputFile << "N;min;median;max;min_greedy;median_greedy;max_greedy\n";
     
     int ndata = (int)x.size();
     for (int i = 0; i < ndata; i++) {
-        outputFile << x[i] << ";" << y[i] << ";" << min_y[i] << ";" << max_y[i] << "\n";
+        outputFile << x[i] << ";" << min_y[i] << ";" << y[i] << ";" << max_y[i] << ";" << min_greedy_y[i] << ";" << greedy_y[i] << ";" << max_greedy_y[i] << "\n";
     }
     outputFile.close();
 }
@@ -192,9 +197,9 @@ int main() {
   // graphToCnfTest();
   // testChromaticBruteAndSAT(); // N <= 9
   // benchmarkChromaticSAT(); // N <= 200 AND M <= 20
-  // createDataForFixedM();
+  createDataForFixedM();
   // testMinimalChromaticNumber();
-  testMaximalChromaticNumber();
+  // testMaximalChromaticNumber();
 
   return 0;
 }
