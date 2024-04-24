@@ -1,8 +1,6 @@
 #ifndef Vector_H
 #define Vector_H
 
-#include "Vector.h"
-
 #include <vector>
 
 template<typename T>
