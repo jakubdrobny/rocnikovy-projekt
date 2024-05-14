@@ -1,7 +1,7 @@
 #ifndef CNF_H
 #define CNF_H
 
-#include "Clause.h"
+#include "claus.h"
 class Graph;
 
 #include <vector>

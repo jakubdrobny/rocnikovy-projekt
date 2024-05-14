@@ -7,7 +7,7 @@
 
 #include "Graph.h"
 #include "CNF.h"
-#include "Clause.h"
+#include "claus.h"
 #include "assert.h"
 
 using namespace CMSat;

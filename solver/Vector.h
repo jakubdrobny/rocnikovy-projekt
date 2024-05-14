@@ -29,7 +29,7 @@ class Vector {
 		T last();
 
 		// vector interface
-		T operator[](int index);
+		T& operator[](int index);
 
 		// duplication
 		void copyTo(Vector<T>* copy);

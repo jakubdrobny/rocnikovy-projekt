@@ -1,15 +1,15 @@
-#ifndef Clause_H
-#define Clause_H
+#ifndef claus_H
+#define claus_H
 
 #include "Literal.h"
 
 #include <vector>
 
-class Clause {
+class clause {
     public:
         std::vector<Literal> literals;
 
-        Clause() {}
+        claus() {}
 
         void addLiteral(Literal literal);
         void print();

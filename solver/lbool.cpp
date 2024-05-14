@@ -12,3 +12,7 @@ lbool::lbool(bool x) {
 lbool operator-(lbool x) {
     return x.val == NOTHING ? lbool() : lbool(!x.val);
 }
+
+bool lbool::operator==(const lbool_val &x) {
+    return this->val == x;
+}

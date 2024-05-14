@@ -8,6 +8,8 @@ class lbool {
         lbool_val val;
         lbool();
         lbool(bool x);
+
+        bool operator==(const lbool_val &x);
 };
 
 lbool operator-(lbool x);

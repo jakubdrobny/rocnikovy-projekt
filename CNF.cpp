@@ -1,5 +1,5 @@
 #include "CNF.h"
-#include "Clause.h"
+#include "claus.h"
 #include "Literal.h"
 #include "Edge.h"
 #include "assert.h"
