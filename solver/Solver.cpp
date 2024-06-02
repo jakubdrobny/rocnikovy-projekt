@@ -130,11 +130,12 @@ Constr* Solver::propagate() {
         (*(this->watches))[index(p)].moveTo(tmp);
 
         for (int i = 0; i < tmp->size(); i++) {
-            if (!((*tmp)[i].propagate(this, p))) {
+            Constr *cur = (*tmp)[i];
+            if (!((*cur).propagate(this, p))) {
                 for (int j = i + 1; j < tmp->size(); j++)
                     watches[index(p)].push(tmp[j]);
                 this->propQ->clear();
-                return (*tmp)[i];
+                return cur;
             }
         }
     }
