@@ -10,6 +10,7 @@ class lbool {
         lbool(bool x);
 
         bool operator==(const lbool_val &x);
+        bool operator!=(const lbool_val &x);
 };
 
 lbool operator-(lbool x);

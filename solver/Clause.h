@@ -10,6 +10,11 @@ class Clause : public Constr {
         Vector<lit> *lits;
 
         static bool Clause_new(Solver *S, Vector<lit> *ps, bool learnt, Clause *out_clause) {}
+        bool locked(Solver *S);
+        void remove(Solver *S);
+        bool simplify(Solver *S);
+        bool propagate(Solver *S, lit p);
+        void calcReason(Solver *s, lit p, Vector<lit> *out_reason);
 };
 
 #endif

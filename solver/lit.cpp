@@ -13,6 +13,10 @@ lit operator-(lit p) {
     return lit(p.getVal());
 }
 
+lit operator==(lit l1, lit l2) {
+    return l1.getVal() == l2.getVal();
+}
+
 bool sign(lit p) {
     return p.getVal() < 0;
 }

@@ -16,3 +16,7 @@ lbool operator-(lbool x) {
 bool lbool::operator==(const lbool_val &x) {
     return this->val == x;
 }
+
+bool lbool::operator!=(const lbool_val &x) {
+    return this->val != x;
+}
