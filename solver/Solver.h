@@ -10,6 +10,7 @@
 #include "Constr.h"
 #include "VarOrder.h"
 #include "Clause.h"
+#include "SearchParams.h"
 
 class Solver {
 	public:
@@ -40,6 +41,8 @@ class Solver {
         Vector<int> *level; // For each variable, the decision level it was assigned.
         int root_level; // Separates incremental and search assumptions.
 
+        Vector<bool> *model;
+
         int nVars();
         int nAssigns();
         int nConstraints();
@@ -62,6 +65,18 @@ class Solver {
         void removeElem(Constr *c, Vector<Constr*> *from);
 
         Constr* propagate();
+        void reduceDB();
+        bool simplifyDB();
+        bool solve(Vector<lit> *assumps);
+        lbool search(int no_of_conflicts, int no_of_learnts, SearchParams *params);
+
+        void undoOne();
+        bool assume(lit p);
+        void cancel();
+        void cancelUntil(int level);
+
+        void analyze(Constr *confl, Vector<lit> *out_learnt, int *out_btlevel);
+        lbool search(int no_of_conflicts, int no_of_learnts, SearchParams params);
 };
 
 #endif

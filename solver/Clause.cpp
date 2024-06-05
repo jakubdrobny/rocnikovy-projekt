@@ -99,7 +99,7 @@ bool Clause::propagate(Solver *S, lit p) {
 }
 
 void Clause::calcReason(Solver *S, lit p, Vector<lit> *out_reason) {
-    for (int i = ((p == NOTHING) ? 0 : 1); i < this->lits->size(); i++)
+    for (int i = ((p == EMPTY) ? 0 : 1); i < this->lits->size(); i++)
         out_reason->push(-((*(this->lits))[i]));
     if (this->learnt) S->claBumpActivity(this);
 }
