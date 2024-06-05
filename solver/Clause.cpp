@@ -36,7 +36,13 @@ bool Clause::Clause_new(Solver *S, Vector<lit> *ps, bool learnt, Clause *out_cla
         c->activity = 0;
         
         if (learnt) {
-            int max_i = 0; // TODO: index of literal with highest decision level"
+            int max_i = 0;
+            for (int j = 0; j < ps->size(); j++) {
+                int l1 = (*S->level)[var((*ps)[j])];
+                int l2 = (*S->level)[var((*ps)[max_i])];
+                if (l1 > l2)
+                    max_i = l1;
+            }
             c->lits[1] = ps[max_i];
             c->lits[max_i] = ps[1];
 
