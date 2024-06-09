@@ -2,6 +2,7 @@
 #define Clause_H
 
 #include "Vector.h"
+#include "Constr.h"
 
 class Clause : public Constr {
     public:

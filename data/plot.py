@@ -16,7 +16,7 @@ xpoints, ypoints = [], [list() for _ in range(len(header) - 1)]
 for row in rows:
     xpoints.append(int(row[0]))
     for i in range(1, len(row)):
-        ypoints[i - 1].append(float(row[i]) if i == 1 else int(row[i]))
+        ypoints[i - 1].append(float(row[i]) if i == 1 else int(float(row[i])))
 
 plt.title(f"Chromatic number of scale-free graphs (BA model)\nwith initial no. of vertices M = {M}")
 plt.xlabel("Number of vertices")
