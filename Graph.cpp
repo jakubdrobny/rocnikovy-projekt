@@ -181,7 +181,7 @@ bool Graph::canColorWithKSAT(int k) {
 
     SATSolver solver;
     solver.new_vars(cnf.vars_num);
-    for (Clause clause : cnf.clauses) {
+    for (Claus clause : cnf.clauses) {
         std::vector<Lit> solverClause;
         for (Literal lit : clause.literals) {
             solverClause.push_back(lit.value < 0 ? Lit(-lit.value - 1, true) : Lit(lit.value - 1, false));

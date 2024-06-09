@@ -85,7 +85,7 @@ void Solver::varBumpActivity(int x) {
 }
 
 void Solver::varDecayActivity() {
-    this->var_inc *= this->var_decay;
+    this->var_inc *= (1 / this->var_decay);
 }
 
 void Solver::varRescaleActivity() {
@@ -95,16 +95,18 @@ void Solver::varRescaleActivity() {
 }
 
 void Solver::claBumpActivity(Clause *c) {
-    if ((c->activity += this->cla_inc) > 1e100) // todo: neviem ci uplne takto to ma byt podla paperu
+    if ((c->activity += this->cla_inc) > 1e100)
         claRescaleActivity();
 }
 
 void Solver::claDecayActivity() {
-    this->cla_inc *= this->cla_decay;
+    this->cla_inc *= (1 / this->cla_decay);
 }
 
 void Solver::claRescaleActivity() {
-    // todo neviem ako presne to urobit podla paperu zatial    
+    for (int i = 0; i < this->learnts->size(); i++)
+        (*(this->learnts))[i]->activity *= 1e-100;
+    this->cla_inc *= 1e-100;
 }
 
 void Solver::decayActivities() {

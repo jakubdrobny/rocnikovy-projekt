@@ -1,7 +1,7 @@
 #ifndef CNF_H
 #define CNF_H
 
-#include "claus.h"
+#include "Claus.h"
 class Graph;
 
 #include <vector>
@@ -9,10 +9,10 @@ class Graph;
 class CNF {
     public:
         int vars_num = 0;
-        std::vector<Clause> clauses;
+        std::vector<Claus> clauses;
 
         void loadFromGraph(Graph *g, int K);
-        void addClause(Clause clause);
+        void addClause(Claus clause);
         void print();
 };
 

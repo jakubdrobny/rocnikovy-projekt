@@ -1,5 +1,5 @@
 #include "CNF.h"
-#include "claus.h"
+#include "Claus.h"
 #include "Literal.h"
 #include "Edge.h"
 #include "assert.h"
@@ -10,7 +10,7 @@ void CNF::loadFromGraph(Graph* g, int K) {
     // phase 1: 
     //   - for each of K colors, add clause with one literal for each node
     for (int node = 0; node < g->N; node++) {
-        Clause clause;
+        Claus clause;
         for (int color = 1; color <= K; color++) {
             clause.addLiteral(Literal(node, color, K));
         }
@@ -27,7 +27,7 @@ void CNF::loadFromGraph(Graph* g, int K) {
                 if (color1 == color2)
                     continue;
 
-                Clause clause;
+                Claus clause;
                 clause.addLiteral(Literal(node, color1, K, true));
                 clause.addLiteral(Literal(node, color2, K, true));
                 this->addClause(clause);
@@ -42,7 +42,7 @@ void CNF::loadFromGraph(Graph* g, int K) {
         if (set_edges.count(std::make_pair(std::min(edge.from, edge.to), std::max(edge.from, edge.to))))
             continue;
         for (int color = 1; color <= K; color++) {
-            Clause clause;
+            Claus clause;
             clause.addLiteral(Literal(edge.from, color, K, true));
             clause.addLiteral(Literal(edge.to, color, K, true));
             this->addClause(clause);
@@ -54,20 +54,20 @@ void CNF::loadFromGraph(Graph* g, int K) {
 
     Edge edge = g->edges[0];
 
-    Clause clause;
+    Claus clause;
     clause.addLiteral(Literal(edge.from, 1, K));
     clause.addLiteral(Literal(edge.to, 1, K));
     this->addClause(clause);
 }
 
-void CNF::addClause(Clause clause) {
+void CNF::addClause(Claus clause) {
     for (Literal lit : clause.literals)
         this->vars_num = std::max(this->vars_num, std::abs(lit.value));
     this->clauses.push_back(clause);
 }
 
 void CNF::print() {
-    for (Clause clause : this->clauses) {
+    for (Claus clause : this->clauses) {
         clause.print();
     }
 }
